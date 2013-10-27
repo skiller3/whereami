@@ -1,7 +1,7 @@
-var map, db;
+var map, locs;
 
 function initDBConnection() {
-    db = new Firebase("https://touch.firebaseIO-demo.com/")
+    locs = new Firebase("https://touch.firebaseio.com/locations")
 }
 
 function initMap() {
@@ -11,6 +11,16 @@ function initMap() {
 	mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    locs.on("value", function(points) {
+	_.each(points.val(), function(pt) {
+	    var latLng = new google.maps.LatLng(pt.lat, pt.lon);
+	    var marker = new google.maps.Marker({
+		position: latLng,
+		title: pt.time
+	    });
+	    marker.setMap(map);
+	})
+    })
 }
 
 function init() {
