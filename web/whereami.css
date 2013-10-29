@@ -21,3 +21,13 @@ h3 {
     padding-top: 0.25em;
     text-align: center;
 }
+
+.labels {
+    color: black;
+    background-color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 5em;
+    border: 1px solid black;
+}

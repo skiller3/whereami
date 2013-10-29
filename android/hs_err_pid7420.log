@@ -1,0 +1,111 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (javaClasses.cpp:129), pid=7420, tid=4800
+#  fatal error: Invalid layout of preloaded class
+#
+# JRE version: 7.0_25-b17
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.25-b01 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000001fbf800):  JavaThread "Unknown thread" [_thread_in_vm, id=4800, stack(0x00000000021e0000,0x00000000022e0000)]
+
+Stack: [0x00000000021e0000,0x00000000022e0000]
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000001fbf800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=4800, stack(0x00000000021e0000,0x00000000022e0000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.014 loading class 0x0000000001eea890 done
+Event: 0.014 loading class 0x0000000001ea41c0 done
+Event: 0.014 loading class 0x0000000001ea4190
+Event: 0.014 loading class 0x0000000001ef44b0
+Event: 0.014 loading class 0x0000000001ef44b0 done
+Event: 0.014 loading class 0x0000000001ef44f0
+Event: 0.014 loading class 0x0000000001ef44f0 done
+Event: 0.014 loading class 0x000000000b80c260
+Event: 0.014 loading class 0x000000000b80c260 done
+Event: 0.014 loading class 0x0000000001ea4190 done
+
+
+Dynamic libraries:
+0x000000013f9d0000 - 0x000000013fa03000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\javaw.exe
+0x0000000077490000 - 0x0000000077639000 	C:\Windows\SYSTEM32\ntdll.dll
+0x0000000077370000 - 0x000000007748f000 	C:\Windows\system32\kernel32.dll
+0x000007fefd720000 - 0x000007fefd78c000 	C:\Windows\system32\KERNELBASE.dll
+0x000007feff3d0000 - 0x000007feff4ab000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fefee60000 - 0x000007fefeeff000 	C:\Windows\system32\msvcrt.dll
+0x000007fefeb20000 - 0x000007fefeb3f000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007feff550000 - 0x000007feff67d000 	C:\Windows\system32\RPCRT4.dll
+0x0000000077270000 - 0x000000007736a000 	C:\Windows\system32\USER32.dll
+0x000007fefe6c0000 - 0x000007fefe727000 	C:\Windows\system32\GDI32.dll
+0x000007fefec90000 - 0x000007fefec9e000 	C:\Windows\system32\LPK.dll
+0x000007feff680000 - 0x000007feff749000 	C:\Windows\system32\USP10.dll
+0x000007fefb340000 - 0x000007fefb534000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac\COMCTL32.dll
+0x000007fefef00000 - 0x000007fefef71000 	C:\Windows\system32\SHLWAPI.dll
+0x000007fefeca0000 - 0x000007fefecce000 	C:\Windows\system32\IMM32.DLL
+0x000007fefecd0000 - 0x000007fefedd9000 	C:\Windows\system32\MSCTF.dll
+0x000000006c3c0000 - 0x000000006c491000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\msvcr100.dll
+0x00000000517c0000 - 0x0000000051ecf000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\server\jvm.dll
+0x000007fefa710000 - 0x000007fefa719000 	C:\Windows\system32\WSOCK32.dll
+0x000007feff750000 - 0x000007feff79d000 	C:\Windows\system32\WS2_32.dll
+0x000007fefef80000 - 0x000007fefef88000 	C:\Windows\system32\NSI.dll
+0x000007fefc320000 - 0x000007fefc35b000 	C:\Windows\system32\WINMM.dll
+0x0000000077650000 - 0x0000000077657000 	C:\Windows\system32\PSAPI.DLL
+0x0000000070e90000 - 0x0000000070e9f000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\verify.dll
+0x0000000070de0000 - 0x0000000070e08000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\java.dll
+0x000000006c150000 - 0x000000006c185000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\jdwp.dll
+0x0000000070e10000 - 0x0000000070e18000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\npt.dll
+0x0000000070e20000 - 0x0000000070e35000 	C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin\zip.dll
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:32359 -Dfile.encoding=Cp1252 -Xbootclasspath:C:\Devtree\tools\adt-bundle-windows-x86_64-20130917\sdk\platforms\android-18\android.jar 
+java_command: org.eclipse.jdt.internal.junit.runner.RemoteTestRunner -version 3 -port 32358 -testLoaderClass org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader -loaderpluginname org.eclipse.jdt.junit4.runtime -classNames whereami.UtilsTest
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Devtree\tools\jdk\windows\jdk-1.7.0_25
+PATH=C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\jre\bin;C:/Devtree/tools/jdk/windows/jdk-1.7.0_25/bin/server;C:/Devtree/tools/jdk/windows/jdk-1.7.0_25/bin;C:/Devtree/tools/jdk/windows/jdk-1.7.0_25/lib/amd64;C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin;C:\sybase\JS-12_5\bin;C:\sybase\OCS-12_5\lib3p;C:\sybase\OCS-12_5\dll;C:\sybase\OCS-12_5\bin;C:\Sybase\DBISQL\bin;C:\Sybase\DataAccess\ADONET\dll;C:\Sybase\DataAccess\ODBC\dll;C:\Sybase\DataAccess\OLEDB\dll;C:\Sybase\OCS-15_0\lib3p;C:\Sybase\OCS-15_0\dll;C:\Sybase\OCS-15_0\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\blp\Api\dde;C:\blp\Api;C:\Program Files (x86)\CVSNT\;C:\Program Files\SSH Communications Security\SSH Secure Shell;C:\Users\isards\AppData\Roaming\cabal\bin;C:\Devtree\tools\ant\ant-1.8.4\bin;C:\Devtree\tools\jdk\windows\jdk-1.7.0_25\bin;C:\Devtree\bin;C:\workspace\cvs;C:\Devtree\tools\R\R-2.15.1\bin;C:\Devtree\tools\eclipse;C:\Devtree\tools\emacs-24.3\bin;C:\Users\isards\AppData\Local\Google\Chrome\Application;C:\Devtree\Rtools\bin;C:\Devtree\Rtools\gcc-4.6.3\bin;C:\Devtree\tools\git\bin;C:\Devtree\tools\MiKTeX\miktex\bin;C:\Devtree\tools\haskell\2013_2_0_0\bin;;C:\Devtree\tools\adt-bundle-windows-x86_64-20130917\eclipse;
+USERNAME=isards
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 45 Stepping 7, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7601 Service Pack 1
+
+CPU:total 8 (4 cores per cpu, 2 threads per core) family 6 model 45 stepping 7, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, ht, tsc, tscinvbit, tscinv
+
+Memory: 4k page, physical 8310352k(1694592k free), swap 16618844k(8431452k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (23.25-b01) for windows-amd64 JRE (1.7.0_25-b17), built on Jun 21 2013 12:58:32 by "java_re" with unknown MS VC++:1600
+
+time: Tue Oct 29 13:10:17 2013
+elapsed time: 0 seconds
+
