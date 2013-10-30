@@ -8,15 +8,10 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-import isard.whereami.R;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.format.DateFormat;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +22,11 @@ public class MainActivity extends Activity {
 	public static final long FIVE_MIN_IN_MILLISEC = 5l * 60l * 1000l;
 	public static final String DATE_FORMAT = "MM/dd/yy kk:mm:ss";
 	
-	private boolean trackingEnabled = false;
+	private static final String INST_STATE_STATUS = "status";
+	private static final String INST_STATE_LAST_TRANS_ATTEMPT = "trans_attempt";
+	private static final String INST_STATE_LAST_TRANS = "trans_attempt";
+	private static final String INST_STATE_TRACKING_ENABLED = "tracking_enabled"; 
+	
 	private Locator locator;
 	private Publisher publisher;
 	
@@ -38,6 +37,46 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		String status = savedInstanceState.getString(INST_STATE_STATUS);
+		if (status != null) switchStatus(Status.forLabel(status));
+		String lastTransAttempt = savedInstanceState.getString(INST_STATE_LAST_TRANS_ATTEMPT);
+		if (lastTransAttempt != null) setLastTransmissionAttempt(lastTransAttempt);
+		String lastTrans = savedInstanceState.getString(INST_STATE_LAST_TRANS);
+		if (lastTrans != null) setLastTransmission(lastTrans);
+		Boolean trackingEnabled = savedInstanceState.getBoolean(INST_STATE_TRACKING_ENABLED);
+		
+		if (trackingEnabled != null && trackingEnabled) {
+			toggleEnabled(findViewById(R.id.enableDisableButton));
+		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		TextView statusTextView = (TextView)findViewById(R.id.statusText);
+		String statusText = String.valueOf(statusTextView.getText()).replaceAll("^.*: ", "");
+		savedInstanceState.putString(INST_STATE_STATUS, statusText);
+		
+		TextView lastTransAttemptView = (TextView)findViewById(R.id.lastTransmissionAttempt);
+		String lastTransAttempt = String.valueOf(lastTransAttemptView.getText()).replaceAll("^.*: ", "");
+		savedInstanceState.putString(INST_STATE_LAST_TRANS_ATTEMPT, lastTransAttempt);
+		
+		TextView lastTransView = (TextView)findViewById(R.id.lastTransmission);
+		String lastTrans = String.valueOf(lastTransView.getText()).replaceAll("^.*: ", "");
+		savedInstanceState.putString(INST_STATE_LAST_TRANS, lastTrans);
+		
+		Button trackingEnabledButton = (Button)findViewById(R.id.enableDisableButton);
+		Boolean trackingEnabled = !"Enable!".equals(trackingEnabledButton.getText());
+		savedInstanceState.putBoolean(INST_STATE_TRACKING_ENABLED, trackingEnabled);
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		cancelTracking();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,26 +85,30 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		if (keyCode == KeyEvent.KEYCODE_BACK) {
+//			Log.info("Back-key pressed.");
+//			Intent intent = new Intent(Intent.ACTION_MAIN);
+//			intent.addCategory(Intent.CATEGORY_HOME);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			startActivity(intent);
+//			return true;
+//		}
+//		
+//		return super.onKeyDown(keyCode, event);
+//	}
+	
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			Log.info("Back-key pressed.");
-			Intent intent = new Intent(Intent.ACTION_MAIN);
-			intent.addCategory(Intent.CATEGORY_HOME);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
-			return true;
-		}
-		
-		return super.onKeyDown(keyCode, event);
+	public void onPause() {
+		super.onPause();
 	}
 	
 	public void toggleEnabled(View toggleView) {
 		Button toggleButton = ((Button)toggleView);
 		String text = toggleButton.getText().toString();
 		
-		trackingEnabled = "Enable!".equals(text);
-		if (trackingEnabled) {
+		if ("Enable!".equals(text)) {
 			startTracking();
 			toggleButton.setText("Disable!");
 		}
@@ -212,6 +255,13 @@ public class MainActivity extends Activity {
 		
 		private Status(String label) {
 			this.label = label;
+		}
+		
+		private static Status forLabel(String label) {
+			for (Status status : Status.values()) {
+				if (status.label.equals(label)) return status;
+			}
+			return null;
 		}
 	}
 	
